@@ -762,11 +762,14 @@ public class FullscreenExoPlayerFragment extends Fragment {
     
     if (player != null) {
         try {
-            // Run on main thread to avoid handler issues
-            if (mainHandler != null && Looper.myLooper() != Looper.getMainLooper()) {
+            // Ensure release called from main thread
+            // If current thread is main, release, if not post message to main
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                releasePlayerInternal();
+            } else if (mainHandler != null) {
                 mainHandler.post(() -> releasePlayerInternal());
             } else {
-                releasePlayerInternal();
+                Log.w("VideoPlayer", "Cannot release player from background thread without a handler. Player may not be released properly.");
             }
         } catch (Exception e) {
             Log.e("VideoPlayer", "Error releasing player", e);
