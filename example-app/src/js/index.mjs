@@ -1,4 +1,4 @@
-const { CapacitorVideoPlayer } = Capacitor.Plugins;
+import { CapacitorVideoPlayer } from 'capacitor-video-player';
 
 document.addEventListener('DOMContentLoaded', () => {
   const videoUrlInput = document.getElementById('videoUrl');
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         url: videoUrl,
         subtitle: subtitleUrl,
         playerId: 'test-player',
-        componentTag: 'div'
+        componentTag: 'div',
       });
       updateStatus(`Player initialized. Player ID: ${res.playerId}`);
       playerId = res.playerId;
