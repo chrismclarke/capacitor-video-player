@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitor Video Player Example</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: block; margin-bottom: 5px; }
+    .input-group input { width: 100%; padding: 8px; box-sizing: border-box; }
+    .button-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    button { padding: 10px 15px; cursor: pointer; }
+    #status { margin-top: 20px; padding: 10px; background-color: #f0f0f0; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Capacitor Video Player Example</h1>
+
+    <div class="input-group">
+      <label for="videoUrl">Video URL</label>
+      <input type="text" id="videoUrl" value="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4">
+    </div>
+
+    <div class="input-group">
+      <label for="subtitleUrl">Subtitle URL (.vtt)</label>
+      <input type="text" id="subtitleUrl" value="">
+    </div>
+
+    <div class="button-group">
+      <button id="play">Play Video</button>
+      <button id="pause">Pause</button>
+      <button id="stop">Stop</button>
+      <button id="getVolume">Get Volume</button>
+      <button id="setVolume">Set Volume (0.5)</button>
+      <button id="getMuted">Get Muted</button>
+      <button id="setMuted">Toggle Muted</button>
+    </div>
+
+    <div id="status">
+      <p><strong>Status:</strong> <span id="status-text">Idle</span></p>
+      <p><strong>Current Time:</strong> <span id="current-time">0</span></p>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
