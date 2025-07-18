@@ -1,3 +1,5 @@
+import { PluginListenerHandle } from '@capacitor/core';
+
 export interface CapacitorVideoPlayerPlugin {
   /**
    * Echo
@@ -33,9 +35,7 @@ export interface CapacitorVideoPlayerPlugin {
    * Get the current time of the current video from a given playerId
    *
    */
-  getCurrentTime(
-    options: capVideoPlayerIdOptions,
-  ): Promise<capVideoPlayerResult>;
+  getCurrentTime(options: capVideoPlayerIdOptions): Promise<capVideoPlayerResult>;
   /**
    * Set the current time to seek the current video to from a given playerId
    *
@@ -91,12 +91,27 @@ export interface CapacitorVideoPlayerPlugin {
    *
    */
   exitPlayer(): Promise<capVideoPlayerResult>;
+  /**
+   * Register event listener
+   */
+  addListener(
+    listener: VideoListener,
+    callback: (e: VideoListenerCallbackEvent) => void,
+  ): Promise<PluginListenerHandle>;
+  /**
+   * Register event listener
+   */
+  addListener(
+    listener: 'jeepCapVideoPlayerExit',
+    callback: (e: VideoListenerExitEvent) => void,
+  ): Promise<PluginListenerHandle>;
+
+  removeAllListeners(): Promise<void>;
 }
 export interface capEchoOptions {
   /**
    *  String to be echoed
    */
-
   value?: string;
 }
 export interface capVideoPlayerOptions {
@@ -307,4 +322,20 @@ export interface SubTitleOptions {
    * Font Size in pixels (default 16)
    */
   fontSize?: number;
+}
+
+type VideoListener =
+  | 'jeepCapVideoPlayerReady'
+  | 'jeepCapVideoPlayerPlay'
+  | 'jeepCapVideoPlayerPause'
+  | 'jeepCapVideoPlayerEnded';
+
+interface VideoListenerCallbackEvent {
+  fromPlayerId: string;
+  currentTime: number;
+}
+
+interface VideoListenerExitEvent {
+  dismiss?: boolean;
+  currentTime: number;
 }

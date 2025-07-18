@@ -22,7 +22,11 @@
 * [`showController()`](#showcontroller)
 * [`isControllerIsFullyVisible()`](#iscontrollerisfullyvisible)
 * [`exitPlayer()`](#exitplayer)
+* [`addListener(VideoListener, ...)`](#addlistenervideolistener-)
+* [`addListener('jeepCapVideoPlayerExit', ...)`](#addlistenerjeepcapvideoplayerexit-)
+* [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
+* [Type Aliases](#type-aliases)
 
 </docgen-index>
 * [Listeners](#listeners)
@@ -469,6 +473,51 @@ Exit player
 --------------------
 
 
+### addListener(VideoListener, ...)
+
+```typescript
+addListener(listener: VideoListener, callback: (e: VideoListenerCallbackEvent) => void) => Promise<PluginListenerHandle>
+```
+
+Register event listener
+
+| Param          | Type                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------- |
+| **`listener`** | <code><a href="#videolistener">VideoListener</a></code>                                           |
+| **`callback`** | <code>(e: <a href="#videolistenercallbackevent">VideoListenerCallbackEvent</a>) =&gt; void</code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### addListener('jeepCapVideoPlayerExit', ...)
+
+```typescript
+addListener(listener: 'jeepCapVideoPlayerExit', callback: (e: VideoListenerExitEvent) => void) => Promise<PluginListenerHandle>
+```
+
+Register event listener
+
+| Param          | Type                                                                                      |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| **`listener`** | <code>'jeepCapVideoPlayerExit'</code>                                                     |
+| **`callback`** | <code>(e: <a href="#videolistenerexitevent">VideoListenerExitEvent</a>) =&gt; void</code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### removeAllListeners()
+
+```typescript
+removeAllListeners() => Promise<void>
+```
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -563,6 +612,37 @@ Exit player
 | -------------- | ------------------- | -------------------------------------- |
 | **`playerId`** | <code>string</code> | Id of DIV Element parent of the player |
 | **`rate`**     | <code>number</code> | Rate value                             |
+
+
+#### PluginListenerHandle
+
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
+
+
+#### VideoListenerCallbackEvent
+
+| Prop               | Type                |
+| ------------------ | ------------------- |
+| **`fromPlayerId`** | <code>string</code> |
+| **`currentTime`**  | <code>number</code> |
+
+
+#### VideoListenerExitEvent
+
+| Prop              | Type                 |
+| ----------------- | -------------------- |
+| **`dismiss`**     | <code>boolean</code> |
+| **`currentTime`** | <code>number</code>  |
+
+
+### Type Aliases
+
+
+#### VideoListener
+
+<code>'jeepCapVideoPlayerReady' | 'jeepCapVideoPlayerPlay' | 'jeepCapVideoPlayerPause' | 'jeepCapVideoPlayerEnded'</code>
 
 </docgen-api>
 
