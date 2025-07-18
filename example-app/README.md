@@ -5,8 +5,24 @@ and comes with a very minimal shell for building an app.
 
 ### Running this example
 
-To run the provided example, you can use `npm start` command.
+Ensure parent plugin built
 
 ```bash
-npm start
+npm run build
+```
+
+```bash
+cd example-app
+```
+
+Run on web
+
+```bash
+npm run start
+```
+
+Run on native
+
+```bash
+npx cap open android
 ```

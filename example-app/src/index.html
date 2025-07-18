@@ -52,22 +52,14 @@
         <input
           type="text"
           id="videoUrl"
-          value="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
+          value="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         />
       </div>
 
-      <div class="input-group">
-        <label for="subtitleUrl">Subtitle URL (.vtt)</label>
-        <input type="text" id="subtitleUrl" value="" />
-      </div>
-
       <div class="button-group">
-        <button id="play">Play Video</button>
+        <button id="playFullscreen">Play Fullscreen</button>
+        <button id="playEmbedded">Play Embedded</button>
         <button id="pause">Pause</button>
-        <button id="stop">Stop</button>
-        <button id="getVolume">Get Volume</button>
-        <button id="setVolume">Set Volume (0.5)</button>
-        <button id="getMuted">Get Muted</button>
         <button id="setMuted">Toggle Muted</button>
       </div>
 
@@ -75,8 +67,12 @@
         <p><strong>Status:</strong> <span id="status-text">Idle</span></p>
         <p><strong>Current Time:</strong> <span id="current-time">0</span></p>
       </div>
+      <div id="videoContainer">
+        <div id="embeddedPlayer"></div>
+        <div id="fullscreenPlayer"></div>
+      </div>
     </div>
 
-    <script type="module" src="js/index.mjs"></script>
+    <script type="module" src="./main.ts"></script>
   </body>
 </html>
