@@ -274,7 +274,7 @@ export class VideoPlayer {
     if (sUrl != null && sUrl.length > 0) {
       // we search for dot + extension (e.g. `.mp4`) for URLs that have the extension in the filename
       // e.g. https://vimeo.com/?file=my-video.mp4
-      const dotExtensionRegex = new RegExp(`\\.(${Object.keys(videoTypes).join('|')})`);
+      const dotExtensionRegex = new RegExp(`\\.(${Object.keys(videoTypes).join('|')})`, 'gi');
       const dotExtensionMatch = dotExtensionRegex.exec(sUrl);
       if (dotExtensionMatch) {
         const ext = dotExtensionMatch[1] as videoExtension;
@@ -283,7 +283,7 @@ export class VideoPlayer {
 
       // we search for the extension (e.g. `m3u8`) for URLs that might have the extension as a query parameter
       // e.g. https://youtube.com/?v=7894289374&type=m3u8
-      const queryParamRegex = new RegExp(`=(${Object.keys(videoTypes).join('|')})`);
+      const queryParamRegex = new RegExp(`=(${Object.keys(videoTypes).join('|')})`, 'gi');
       const queryParamMatch = queryParamRegex.exec(sUrl);
       if (queryParamMatch) {
         const ext = queryParamMatch[1] as videoExtension;

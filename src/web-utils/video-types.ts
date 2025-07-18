@@ -3,7 +3,7 @@ export type videoMimeType = (typeof videoTypes)[videoExtension];
 
 export const videoTypes = {
   mp4: 'video/mp4',
-  webm: 'video/mp4',
+  webm: 'video/webm',
   cmaf: 'video/mp4',
   cmfv: 'video/mp4',
   m3u8: 'application/x-mpegURL',

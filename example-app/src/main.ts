@@ -1,4 +1,6 @@
-import { CapacitorVideoPlayer, type capVideoPlayerMode } from 'capacitor-video-player';
+import { CapacitorVideoPlayer } from 'capacitor-video-player';
+
+type capVideoPlayerMode = 'fullscreen' | 'embedded';
 
 class VideoPlayerDemo {
   private videoUrlInput: HTMLInputElement;
@@ -6,7 +8,7 @@ class VideoPlayerDemo {
   private currentTimeText: HTMLElement;
 
   /** As embedded and fullscreen use different players track their init status separately */
-  private initalizers: Record<capVideoPlayerMode, boolean> = { embedded: false, fullscreen: false };
+  private initializers: Record<capVideoPlayerMode, boolean> = { embedded: false, fullscreen: false };
 
   /** ID returned from setInterval used to track playback time */
   private playbackIntervalTrackerId?: number;
@@ -37,7 +39,7 @@ class VideoPlayerDemo {
     CapacitorVideoPlayer.addListener('jeepCapVideoPlayerExit', (e) => {
       this.updateStatus('Player has been dismissed');
       // full screen will re-init every play
-      this.initalizers.fullscreen = false;
+      this.initializers.fullscreen = false;
     });
     CapacitorVideoPlayer.addListener('jeepCapVideoPlayerReady', (data) => {
       // Optionally handle ready event
@@ -54,7 +56,7 @@ class VideoPlayerDemo {
   private startPlaybackTimeTracking() {
     this.stopPlaybackTimeTracking();
     this.playbackIntervalTrackerId = window.setInterval(async () => {
-      if (this.initalizers.embedded) {
+      if (this.initializers.embedded) {
         const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'embeddedPlayer' });
         this.currentTimeText.textContent = `${Math.round(value)}`;
       }
@@ -74,7 +76,7 @@ class VideoPlayerDemo {
   private async play(mode: capVideoPlayerMode) {
     // keep separate references for embedded and fullscreen players
     const playerId = `${mode}Player`;
-    if (!this.initalizers[mode]) {
+    if (!this.initializers[mode]) {
       const result = await CapacitorVideoPlayer.initPlayer({
         mode,
         url: this.videoUrlInput.value,
@@ -86,7 +88,7 @@ class VideoPlayerDemo {
         this.updateStatus('Failed to initialize player');
         return;
       }
-      this.initalizers[mode] = true;
+      this.initializers[mode] = true;
     }
     await CapacitorVideoPlayer.stopAllPlayers();
     try {
